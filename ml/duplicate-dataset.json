@@ -1,0 +1,1312 @@
+{
+  "description": "Hand-written labelled dataset for CivicFix duplicate detection. Synthetic (written by the developer, not real citizen data). Reports in the same cluster describe the same real-world problem. Offsets are metres east/north; day = days after a fixed base date. Groups are split into dev (used to choose the threshold) and test (used once for the final numbers). A third split, 'stress', was written after the first evaluation to probe cases where location alone fails (different same-category problems very close together; the same problem reported with noisy GPS 100-180 m apart). It is never used for tuning. Because it was designed knowing the distance baseline's weakness, it is deliberately harder for that baseline.",
+  "baseDate": "2026-09-01T09:00:00Z",
+  "groups": [
+    {
+      "name": "Connaught Place",
+      "center": [
+        28.6315,
+        77.2167
+      ],
+      "split": "dev",
+      "clusters": [
+        {
+          "id": "cp-pothole-ecircle",
+          "category": "roads",
+          "at": [
+            0,
+            0
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              0,
+              "Huge pothole on Outer Circle",
+              "Deep pothole near Block E of Outer Circle, two-wheelers are falling at night."
+            ],
+            [
+              25,
+              -10,
+              1,
+              "Road damaged near E block",
+              "There is a big crater in the road in front of E block, very dangerous for bikes."
+            ],
+            [
+              -15,
+              20,
+              3,
+              "Gaddha on road",
+              "Bada gaddha hai road pe near Connaught Place E block, please fix jaldi."
+            ],
+            [
+              40,
+              5,
+              6,
+              "Pothole still not fixed",
+              "The pothole on Outer Circle near E block is getting bigger after rain."
+            ]
+          ]
+        },
+        {
+          "id": "cp-pothole-barakhamba",
+          "category": "roads",
+          "at": [
+            180,
+            60
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              2,
+              "Pothole at Barakhamba Road crossing",
+              "Pothole right at the Barakhamba road turn, cars swerving suddenly."
+            ],
+            [
+              10,
+              15,
+              4,
+              "Broken road surface at crossing",
+              "Road surface broken at the Barakhamba crossing, needs patching."
+            ]
+          ]
+        },
+        {
+          "id": "cp-light-eblock",
+          "category": "streetlights",
+          "at": [
+            30,
+            10
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              1,
+              "Streetlight not working",
+              "Street light near E block Outer Circle has been dead for a week, area is completely dark."
+            ],
+            [
+              -20,
+              10,
+              5,
+              "Dark stretch near E block",
+              "Lamp post bulb fused near E block, unsafe for pedestrians at night."
+            ]
+          ]
+        },
+        {
+          "id": "cp-garbage-gate7",
+          "category": "garbage",
+          "at": [
+            -150,
+            -100
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              0,
+              "Overflowing dustbin near metro gate",
+              "Dustbin near metro gate 7 overflowing, garbage spilling onto footpath."
+            ],
+            [
+              12,
+              -8,
+              2,
+              "Garbage pile at gate 7",
+              "Trash piled up outside metro gate 7, stray dogs spreading it."
+            ],
+            [
+              -5,
+              6,
+              9,
+              "Kachra everywhere",
+              "Kachra ka dher near gate 7, smell is unbearable."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Lajpat Nagar",
+      "center": [
+        28.5677,
+        77.2433
+      ],
+      "split": "test",
+      "clusters": [
+        {
+          "id": "ln-water-lane2",
+          "category": "water",
+          "at": [
+            0,
+            0
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              0,
+              "Water pipe burst in Central Market",
+              "Main water pipe burst near Central Market lane 2, clean water flowing on road since morning."
+            ],
+            [
+              20,
+              10,
+              0,
+              "Water leakage on lane 2",
+              "Huge water leakage from pipeline in lane 2, Central Market, road flooded."
+            ],
+            [
+              -10,
+              25,
+              2,
+              "Paani waste ho raha hai",
+              "Pipe leak near market, paani continuously beh raha hai."
+            ]
+          ]
+        },
+        {
+          "id": "ln-water-amarcolony",
+          "category": "water",
+          "at": [
+            120,
+            -200
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              1,
+              "Leaking pipe near Amar Colony gate",
+              "Small leak from water pipe near Amar Colony gate, puddle forming."
+            ]
+          ]
+        },
+        {
+          "id": "ln-drain-lane2",
+          "category": "drainage",
+          "at": [
+            40,
+            -20
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              1,
+              "Blocked drain in lane 2",
+              "Drain blocked in Central Market lane 2, dirty water overflowing."
+            ],
+            [
+              15,
+              10,
+              3,
+              "Naali overflow",
+              "Naali choke hai market ke paas, ganda paani road par."
+            ],
+            [
+              -10,
+              5,
+              4,
+              "Sewage overflowing near market",
+              "Sewage water overflowing from gutter near lane 2, foul smell."
+            ]
+          ]
+        },
+        {
+          "id": "ln-road-speedbreaker",
+          "category": "roads",
+          "at": [
+            -200,
+            150
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              5,
+              "Speed breaker broken",
+              "Speed breaker on Ring Road service lane is broken, sharp edges damaging tyres."
+            ],
+            [
+              10,
+              -5,
+              8,
+              "Damaged speed breaker",
+              "The speed breaker near service lane is cracked and broken."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Karol Bagh",
+      "center": [
+        28.6519,
+        77.1909
+      ],
+      "split": "dev",
+      "clusters": [
+        {
+          "id": "kb-garbage-ajmalkhan",
+          "category": "garbage",
+          "at": [
+            0,
+            0
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              0,
+              "Garbage not collected for days",
+              "Garbage not collected from Ajmal Khan Road corner for 4 days."
+            ],
+            [
+              18,
+              -12,
+              2,
+              "Waste piling at Ajmal Khan Road",
+              "Waste piling up at the corner of Ajmal Khan Road, rubbish blocking the footpath."
+            ]
+          ]
+        },
+        {
+          "id": "kb-garbage-gaffar",
+          "category": "garbage",
+          "at": [
+            100,
+            90
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              1,
+              "Overflowing bin at Gaffar Market",
+              "Community bin at Gaffar Market entrance overflowing."
+            ],
+            [
+              -8,
+              10,
+              3,
+              "Dustbin full at Gaffar Market",
+              "Dustbin full and overflowing at Gaffar Market entrance, rubbish on road."
+            ]
+          ]
+        },
+        {
+          "id": "kb-infra-bench",
+          "category": "infrastructure",
+          "at": [
+            20,
+            0
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              2,
+              "Broken bench in park",
+              "Benches in the community park near Ajmal Khan Road are broken."
+            ]
+          ]
+        },
+        {
+          "id": "kb-light-pusa",
+          "category": "streetlights",
+          "at": [
+            -220,
+            -60
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              3,
+              "Streetlights off on Pusa Road",
+              "Entire row of streetlights off on Pusa Road near the metro pillar 120."
+            ],
+            [
+              30,
+              10,
+              4,
+              "Pusa Road dark at night",
+              "No street lights working on Pusa Road, very dark near pillar 120."
+            ],
+            [
+              -15,
+              -5,
+              40,
+              "Streetlight issue again",
+              "Street lights on Pusa Road near pillar 120 have stopped working again."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Saket",
+      "center": [
+        28.5245,
+        77.2066
+      ],
+      "split": "test",
+      "clusters": [
+        {
+          "id": "sk-pothole-pressenclave",
+          "category": "roads",
+          "at": [
+            0,
+            0
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              0,
+              "Potholes on Press Enclave Marg",
+              "Multiple potholes on Press Enclave Marg opposite the mall."
+            ],
+            [
+              35,
+              -20,
+              1,
+              "Road full of holes opposite mall",
+              "The road opposite Select City mall is full of holes, traffic slows down."
+            ],
+            [
+              -25,
+              10,
+              3,
+              "Crater on Press Enclave road",
+              "Big crater on Press Enclave road near mall, water fills it when it rains."
+            ]
+          ]
+        },
+        {
+          "id": "sk-pothole-metro",
+          "category": "roads",
+          "at": [
+            -160,
+            140
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              2,
+              "Pothole near Saket metro",
+              "Pothole just outside Saket metro station exit 1."
+            ],
+            [
+              5,
+              -12,
+              6,
+              "Hole in road at metro exit",
+              "Deep hole in road at metro exit 1, autos getting stuck."
+            ]
+          ]
+        },
+        {
+          "id": "sk-light-pole-jblock",
+          "category": "streetlights",
+          "at": [
+            200,
+            -100
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              4,
+              "Light pole fallen",
+              "A street light pole has fallen in J block lane, wires are exposed."
+            ],
+            [
+              12,
+              8,
+              4,
+              "Electric pole down with wires",
+              "Lamp post collapsed in J block with live wires hanging, dangerous."
+            ]
+          ]
+        },
+        {
+          "id": "sk-garbage-plot",
+          "category": "garbage",
+          "at": [
+            -60,
+            -180
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              7,
+              "Garbage dumped in empty plot",
+              "People dumping trash in the empty plot behind J block."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Dwarka Sector 10",
+      "center": [
+        28.5823,
+        77.05
+      ],
+      "split": "dev",
+      "clusters": [
+        {
+          "id": "dw-drain-market",
+          "category": "drainage",
+          "at": [
+            0,
+            0
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              0,
+              "Waterlogging due to blocked drain",
+              "Sector 10 main road waterlogged because drain is blocked."
+            ],
+            [
+              40,
+              -30,
+              1,
+              "Drain choked at Sector 10",
+              "Storm water drain choked near Sector 10 market, water standing on road."
+            ],
+            [
+              -20,
+              15,
+              1,
+              "Nala blocked",
+              "Nala blocked hai sector 10 market ke paas, paani bhar gaya."
+            ]
+          ]
+        },
+        {
+          "id": "dw-water-market",
+          "category": "water",
+          "at": [
+            30,
+            20
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              2,
+              "Pipeline leak at Sector 10",
+              "Drinking water pipeline leaking near sector 10 market, wasting water."
+            ]
+          ]
+        },
+        {
+          "id": "dw-infra-footpath",
+          "category": "infrastructure",
+          "at": [
+            -150,
+            -200
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              3,
+              "Broken footpath tiles",
+              "Footpath tiles broken outside Sector 10 park, people tripping."
+            ],
+            [
+              10,
+              10,
+              9,
+              "Damaged footpath near park",
+              "Footpath near the park gate is damaged with loose tiles."
+            ]
+          ]
+        },
+        {
+          "id": "dw-other-cattle",
+          "category": "other",
+          "at": [
+            250,
+            50
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              4,
+              "Stray cattle on road",
+              "Stray cattle sitting on the main road near Sector 10 crossing causing jams."
+            ],
+            [
+              -10,
+              0,
+              5,
+              "Cows blocking traffic",
+              "Cows blocking traffic at sector 10 crossing every evening."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Rohini Sector 7",
+      "center": [
+        28.7158,
+        77.113
+      ],
+      "split": "test",
+      "clusters": [
+        {
+          "id": "rh-light-pocketb",
+          "category": "streetlights",
+          "at": [
+            0,
+            0
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              0,
+              "Streetlights not working Sector 7",
+              "Streetlights in Sector 7 pocket B not working for 10 days."
+            ],
+            [
+              20,
+              15,
+              2,
+              "Dark lane in pocket B",
+              "Pocket B lane is completely dark, all lights are off."
+            ],
+            [
+              -30,
+              -10,
+              5,
+              "Bulb fused in streetlight",
+              "Street light bulbs fused in pocket B, sector 7, women feel unsafe."
+            ]
+          ]
+        },
+        {
+          "id": "rh-light-school",
+          "category": "streetlights",
+          "at": [
+            150,
+            -130
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              3,
+              "Flickering light near school",
+              "Streetlight near the school gate keeps flickering all night."
+            ]
+          ]
+        },
+        {
+          "id": "rh-garbage-park",
+          "category": "garbage",
+          "at": [
+            10,
+            -20
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              1,
+              "Garbage near pocket B park",
+              "Garbage dumped next to pocket B park, smells very bad."
+            ],
+            [
+              -15,
+              10,
+              3,
+              "Kooda near park",
+              "Park ke bahar kooda pada hai, bahut badbu aa rahi hai."
+            ]
+          ]
+        },
+        {
+          "id": "rh-road-busstand",
+          "category": "roads",
+          "at": [
+            -250,
+            100
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              6,
+              "Road caved in",
+              "Part of the road has caved in near Sector 7 bus stand."
+            ],
+            [
+              20,
+              5,
+              7,
+              "Road sinking near bus stand",
+              "Road surface sinking near the bus stand, big depression forming."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Mayur Vihar Phase 1",
+      "center": [
+        28.6047,
+        77.2937
+      ],
+      "split": "dev",
+      "clusters": [
+        {
+          "id": "mv-water-pocket2",
+          "category": "water",
+          "at": [
+            0,
+            0
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              0,
+              "No water supply and leak",
+              "Water pipe leaking near Phase 1 pocket 2, supply pressure is very low."
+            ],
+            [
+              25,
+              20,
+              1,
+              "Water leakage in pocket 2",
+              "Continuous water leakage from underground pipe in pocket 2, Phase 1."
+            ]
+          ]
+        },
+        {
+          "id": "mv-water-ddavalve",
+          "category": "water",
+          "at": [
+            -120,
+            -150
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              2,
+              "Valve leaking near DDA flats",
+              "Water valve near the DDA flats gate is leaking."
+            ],
+            [
+              5,
+              8,
+              3,
+              "Leaking valve at flats gate",
+              "The valve near DDA flats gate leaking water for days."
+            ]
+          ]
+        },
+        {
+          "id": "mv-drain-pocket2",
+          "category": "drainage",
+          "at": [
+            5,
+            10
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              1,
+              "Drain overflowing in pocket 2",
+              "Drain overflowing in pocket 2, Phase 1, mosquito breeding."
+            ]
+          ]
+        },
+        {
+          "id": "mv-road-nh24",
+          "category": "roads",
+          "at": [
+            200,
+            200
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              2,
+              "Potholes on service road",
+              "Service road along NH-24 near Phase 1 has many potholes."
+            ],
+            [
+              -20,
+              -10,
+              4,
+              "Service road damaged",
+              "The service road near NH-24 is badly damaged with potholes."
+            ],
+            [
+              400,
+              0,
+              5,
+              "Pothole on NH-24 service road",
+              "Pothole on the service road of NH-24, near the flyover."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Janakpuri",
+      "center": [
+        28.6219,
+        77.0878
+      ],
+      "split": "test",
+      "clusters": [
+        {
+          "id": "jp-garbage-cblock",
+          "category": "garbage",
+          "at": [
+            0,
+            0
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              0,
+              "Overflowing garbage at C block market",
+              "Garbage bins overflowing at C block market, waste on road."
+            ],
+            [
+              15,
+              -10,
+              1,
+              "Bin overflow C block",
+              "C block market dustbin overflowing since 3 days."
+            ],
+            [
+              -20,
+              5,
+              2,
+              "Trash spread across market road",
+              "Trash spread on the market road in C block, dogs tearing bags."
+            ],
+            [
+              10,
+              30,
+              4,
+              "Market kachra",
+              "C block market mein kachra overflow ho raha hai."
+            ]
+          ]
+        },
+        {
+          "id": "jp-garbage-burning",
+          "category": "garbage",
+          "at": [
+            90,
+            -170
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              3,
+              "Garbage burning near drain",
+              "Someone is burning garbage near the drain behind B block, smoke everywhere."
+            ]
+          ]
+        },
+        {
+          "id": "jp-drain-cover",
+          "category": "drainage",
+          "at": [
+            100,
+            -160
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              3,
+              "Drain cover missing",
+              "Drain cover missing behind B block, open drain is a hazard."
+            ],
+            [
+              -5,
+              10,
+              5,
+              "Open drain behind B block",
+              "Open drain behind B block without cover, child almost fell."
+            ]
+          ]
+        },
+        {
+          "id": "jp-light-daytime",
+          "category": "streetlights",
+          "at": [
+            -180,
+            40
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              2,
+              "Streetlight on during day",
+              "Streetlights on Pankha Road stay on during the day, wasting electricity."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Vasant Kunj",
+      "center": [
+        28.5293,
+        77.152
+      ],
+      "split": "dev",
+      "clusters": [
+        {
+          "id": "vk-infra-busshelter",
+          "category": "infrastructure",
+          "at": [
+            0,
+            0
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              0,
+              "Bus shelter roof broken",
+              "Bus shelter roof at Sector C stop is broken and leaking."
+            ],
+            [
+              10,
+              -5,
+              3,
+              "Damaged bus stop",
+              "Bus stop at Sector C is damaged, roof sheets fallen."
+            ]
+          ]
+        },
+        {
+          "id": "vk-infra-swing",
+          "category": "infrastructure",
+          "at": [
+            140,
+            120
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              2,
+              "Park swing broken",
+              "Swings in the Sector C children's park are broken."
+            ]
+          ]
+        },
+        {
+          "id": "vk-road-busstop",
+          "category": "roads",
+          "at": [
+            20,
+            0
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              1,
+              "Pothole near bus stop",
+              "Pothole right in front of Sector C bus stop, buses splash water."
+            ],
+            [
+              -10,
+              12,
+              2,
+              "Road damage at bus stop",
+              "Road damaged at sector C bus stop, deep pothole."
+            ]
+          ]
+        },
+        {
+          "id": "vk-garbage-malba",
+          "category": "garbage",
+          "at": [
+            -200,
+            -150
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              5,
+              "Construction debris dumped",
+              "Construction debris (malba) dumped on the roadside near the mall."
+            ],
+            [
+              15,
+              0,
+              7,
+              "Malba on roadside",
+              "Malba pada hai road side pe near mall, blocking half the road."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Shahdara",
+      "center": [
+        28.6731,
+        77.2894
+      ],
+      "split": "test",
+      "clusters": [
+        {
+          "id": "sh-drain-gtroad",
+          "category": "drainage",
+          "at": [
+            0,
+            0
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              0,
+              "Sewer overflowing on main road",
+              "Sewer overflowing on GT Road near Shahdara flyover, dirty water everywhere."
+            ],
+            [
+              30,
+              10,
+              1,
+              "Gutter overflow near flyover",
+              "Gutter water overflowing on GT road near the flyover, terrible smell."
+            ],
+            [
+              -20,
+              -25,
+              2,
+              "Sewage on road",
+              "Sewage flowing on the road near Shahdara flyover."
+            ]
+          ]
+        },
+        {
+          "id": "sh-drain-manhole",
+          "category": "drainage",
+          "at": [
+            -130,
+            150
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              4,
+              "Manhole open",
+              "Manhole cover missing on the lane behind the police station."
+            ],
+            [
+              10,
+              -6,
+              6,
+              "Open manhole danger",
+              "Open manhole in the lane behind the police station, no cover."
+            ]
+          ]
+        },
+        {
+          "id": "sh-road-sewerdamage",
+          "category": "roads",
+          "at": [
+            10,
+            -10
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              3,
+              "Road broken due to sewer water",
+              "Road near Shahdara flyover broken because of constant sewer water."
+            ]
+          ]
+        },
+        {
+          "id": "sh-other-parking",
+          "category": "other",
+          "at": [
+            220,
+            -80
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              2,
+              "Illegal parking blocking road",
+              "Illegal parking near the market is blocking the road completely."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ITO (stress: close same-category neighbours)",
+      "center": [
+        28.6286,
+        77.241
+      ],
+      "split": "stress",
+      "clusters": [
+        {
+          "id": "st-pothole-ito",
+          "category": "roads",
+          "at": [
+            0,
+            0
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              0,
+              "Pothole at ITO crossing",
+              "Deep pothole in the middle of the ITO crossing, left lane."
+            ],
+            [
+              10,
+              5,
+              2,
+              "Big hole at ITO signal",
+              "Big hole in the road at ITO signal near the left lane."
+            ]
+          ]
+        },
+        {
+          "id": "st-divider-ito",
+          "category": "roads",
+          "at": [
+            40,
+            0
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              1,
+              "Missing road divider railing",
+              "Railing of the road divider at ITO is missing, people crossing dangerously."
+            ],
+            [
+              5,
+              -5,
+              3,
+              "Divider railing broken at ITO",
+              "Divider railing broken and removed near ITO, pedestrians jumping across."
+            ]
+          ]
+        },
+        {
+          "id": "st-bin-ito",
+          "category": "garbage",
+          "at": [
+            0,
+            60
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              0,
+              "Bin overflowing near bus stop",
+              "Garbage bin overflowing at ITO bus stop."
+            ]
+          ]
+        },
+        {
+          "id": "st-carcass-ito",
+          "category": "garbage",
+          "at": [
+            30,
+            60
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              2,
+              "Dead animal on roadside",
+              "Dead dog lying on the roadside near ITO bus stop, needs removal."
+            ]
+          ]
+        },
+        {
+          "id": "st-pole-ito",
+          "category": "streetlights",
+          "at": [
+            -50,
+            -30
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              1,
+              "Streetlight pole leaning",
+              "Streetlight pole leaning dangerously at ITO footpath, may fall."
+            ]
+          ]
+        },
+        {
+          "id": "st-fob-ito",
+          "category": "streetlights",
+          "at": [
+            -20,
+            -40
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              3,
+              "Lights off on footbridge",
+              "Lights on the ITO foot over bridge are not working, very dark."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Nehru Place (stress: noisy GPS)",
+      "center": [
+        28.5492,
+        77.251
+      ],
+      "split": "stress",
+      "clusters": [
+        {
+          "id": "st-watermain-np",
+          "category": "water",
+          "at": [
+            0,
+            0
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              0,
+              "Water main burst outside Nehru Place",
+              "Water main burst outside Nehru Place bus terminal, fountain of water on road."
+            ],
+            [
+              120,
+              40,
+              0,
+              "Pipe burst flooding road near bus terminal",
+              "Burst water pipe flooding the road near Nehru Place bus terminal."
+            ],
+            [
+              -90,
+              -110,
+              1,
+              "Water fountain from broken pipe",
+              "Broken water main near Nehru Place terminal throwing water up, huge wastage."
+            ]
+          ]
+        },
+        {
+          "id": "st-drain-paras",
+          "category": "drainage",
+          "at": [
+            200,
+            -250
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              2,
+              "Drain blocked behind Paras cinema",
+              "Drain behind Paras cinema blocked with plastic."
+            ],
+            [
+              140,
+              60,
+              3,
+              "Plastic choking drain near cinema",
+              "Plastic waste choking the drain near Paras cinema, water stagnant."
+            ]
+          ]
+        },
+        {
+          "id": "st-garbage-np",
+          "category": "garbage",
+          "at": [
+            -250,
+            200
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              1,
+              "Garbage heap at Nehru Place entrance",
+              "Garbage heap at the Nehru Place main entrance, rotting."
+            ],
+            [
+              130,
+              -90,
+              2,
+              "Waste dumped at main entrance",
+              "Waste dumped near Nehru Place main entrance, flies everywhere."
+            ]
+          ]
+        },
+        {
+          "id": "st-speedbreaker-np",
+          "category": "roads",
+          "at": [
+            -150,
+            250
+          ],
+          "reports": [
+            [
+              0,
+              0,
+              2,
+              "Speed breaker without paint",
+              "Speed breaker at Nehru Place entrance has no paint, invisible at night."
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

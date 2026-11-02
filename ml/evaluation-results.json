@@ -1,0 +1,293 @@
+{
+  "generatedAt": "2026-11-02T03:56:03.991Z",
+  "config": {
+    "maxDistanceM": 300,
+    "maxAgeDays": 30,
+    "weights": {
+      "text": 0.45,
+      "geo": 0.3,
+      "category": 0.15,
+      "time": 0.1
+    },
+    "threshold": 0.51,
+    "maxSuggestions": 5
+  },
+  "data": {
+    "dev": {
+      "reports": 42,
+      "clusters": 20,
+      "pairs": 861,
+      "duplicatePairs": 29,
+      "pairsInsideWindow": 126
+    },
+    "test": {
+      "reports": 40,
+      "clusters": 20,
+      "pairs": 780,
+      "duplicatePairs": 28,
+      "pairsInsideWindow": 125
+    },
+    "stress": {
+      "reports": 16,
+      "clusters": 10,
+      "pairs": 120,
+      "duplicatePairs": 7,
+      "pairsInsideWindow": 39
+    }
+  },
+  "methods": [
+    {
+      "name": "CivicFix model (text+geo+category+time)",
+      "parameter": "score threshold",
+      "chosenOnDev": 0.51,
+      "dev": {
+        "precision": 0.9259259259259259,
+        "recall": 0.8620689655172413,
+        "f1": 0.8928571428571429,
+        "tp": 25,
+        "fp": 2,
+        "fn": 4
+      },
+      "test": {
+        "precision": 1,
+        "recall": 1,
+        "f1": 1,
+        "tp": 28,
+        "fp": 0,
+        "fn": 0,
+        "tn": 752
+      },
+      "stress": {
+        "precision": 0.5,
+        "recall": 0.8571428571428571,
+        "f1": 0.631578947368421,
+        "tp": 6,
+        "fp": 6,
+        "fn": 1,
+        "tn": 107
+      },
+      "stressFalsePositives": [
+        "#83 \"Pothole at ITO crossing\" <-> #85 \"Missing road divider railing\" (st-pothole-ito vs st-divider-ito; 40 m, score=0.5507)",
+        "#83 \"Pothole at ITO crossing\" <-> #86 \"Divider railing broken at ITO\" (st-pothole-ito vs st-divider-ito; 45 m, score=0.5189)",
+        "#84 \"Big hole at ITO signal\" <-> #85 \"Missing road divider railing\" (st-pothole-ito vs st-divider-ito; 30 m, score=0.5435)",
+        "#84 \"Big hole at ITO signal\" <-> #86 \"Divider railing broken at ITO\" (st-pothole-ito vs st-divider-ito; 36 m, score=0.5298)",
+        "#87 \"Bin overflowing near bus stop\" <-> #88 \"Dead animal on roadside\" (st-bin-ito vs st-carcass-ito; 30 m, score=0.5801)",
+        "#89 \"Streetlight pole leaning\" <-> #90 \"Lights off on footbridge\" (st-pole-ito vs st-fob-ito; 32 m, score=0.581)"
+      ],
+      "stressFalseNegatives": [
+        "#92 \"Pipe burst flooding road near bus terminal\" <-> #93 \"Water fountain from broken pipe\" (st-watermain-np; 258 m, score=0.3606)"
+      ],
+      "testFalsePositives": [],
+      "testFalseNegatives": []
+    },
+    {
+      "name": "Baseline: distance only",
+      "parameter": "max distance (m)",
+      "chosenOnDev": 80,
+      "dev": {
+        "precision": 0.5869565217391305,
+        "recall": 0.9310344827586207,
+        "f1": 0.7200000000000001,
+        "tp": 27,
+        "fp": 19,
+        "fn": 2
+      },
+      "test": {
+        "precision": 0.5833333333333334,
+        "recall": 1,
+        "f1": 0.7368421052631579,
+        "tp": 28,
+        "fp": 20,
+        "fn": 0,
+        "tn": 732
+      },
+      "stress": {
+        "precision": 0.09090909090909091,
+        "recall": 0.2857142857142857,
+        "f1": 0.13793103448275862,
+        "tp": 2,
+        "fp": 20,
+        "fn": 5,
+        "tn": 93
+      },
+      "stressFalsePositives": [
+        "#83 \"Pothole at ITO crossing\" <-> #85 \"Missing road divider railing\" (st-pothole-ito vs st-divider-ito; 40 m, score=0.5507)",
+        "#83 \"Pothole at ITO crossing\" <-> #86 \"Divider railing broken at ITO\" (st-pothole-ito vs st-divider-ito; 45 m, score=0.5189)",
+        "#83 \"Pothole at ITO crossing\" <-> #87 \"Bin overflowing near bus stop\" (st-pothole-ito vs st-bin-ito; 60 m, score=0.3483)",
+        "#83 \"Pothole at ITO crossing\" <-> #88 \"Dead animal on roadside\" (st-pothole-ito vs st-carcass-ito; 67 m, score=0.3353)",
+        "#83 \"Pothole at ITO crossing\" <-> #89 \"Streetlight pole leaning\" (st-pothole-ito vs st-pole-ito; 58 m, score=0.3464)",
+        "#83 \"Pothole at ITO crossing\" <-> #90 \"Lights off on footbridge\" (st-pothole-ito vs st-fob-ito; 45 m, score=0.355)",
+        "#84 \"Big hole at ITO signal\" <-> #85 \"Missing road divider railing\" (st-pothole-ito vs st-divider-ito; 30 m, score=0.5435)",
+        "#84 \"Big hole at ITO signal\" <-> #86 \"Divider railing broken at ITO\" (st-pothole-ito vs st-divider-ito; 36 m, score=0.5298)",
+        "#84 \"Big hole at ITO signal\" <-> #87 \"Bin overflowing near bus stop\" (st-pothole-ito vs st-bin-ito; 56 m, score=0.3441)",
+        "#84 \"Big hole at ITO signal\" <-> #88 \"Dead animal on roadside\" (st-pothole-ito vs st-carcass-ito; 58 m, score=0.3488)",
+        "#84 \"Big hole at ITO signal\" <-> #89 \"Streetlight pole leaning\" (st-pothole-ito vs st-pole-ito; 69 m, score=0.3337)",
+        "#84 \"Big hole at ITO signal\" <-> #90 \"Lights off on footbridge\" (st-pothole-ito vs st-fob-ito; 54 m, score=0.3504)",
+        "#85 \"Missing road divider railing\" <-> #87 \"Bin overflowing near bus stop\" (st-divider-ito vs st-bin-ito; 72 m, score=0.327)",
+        "#85 \"Missing road divider railing\" <-> #88 \"Dead animal on roadside\" (st-divider-ito vs st-carcass-ito; 61 m, score=0.3385)",
+        "#85 \"Missing road divider railing\" <-> #90 \"Lights off on footbridge\" (st-divider-ito vs st-fob-ito; 72 m, score=0.324)",
+        "#86 \"Divider railing broken at ITO\" <-> #87 \"Bin overflowing near bus stop\" (st-divider-ito vs st-bin-ito; 79 m, score=0.3179)",
+        "#86 \"Divider railing broken at ITO\" <-> #88 \"Dead animal on roadside\" (st-divider-ito vs st-carcass-ito; 67 m, score=0.3881)",
+        "#86 \"Divider railing broken at ITO\" <-> #90 \"Lights off on footbridge\" (st-divider-ito vs st-fob-ito; 74 m, score=0.3343)",
+        "#87 \"Bin overflowing near bus stop\" <-> #88 \"Dead animal on roadside\" (st-bin-ito vs st-carcass-ito; 30 m, score=0.5801)",
+        "#89 \"Streetlight pole leaning\" <-> #90 \"Lights off on footbridge\" (st-pole-ito vs st-fob-ito; 32 m, score=0.581)"
+      ],
+      "stressFalseNegatives": [
+        "#91 \"Water main burst outside Nehru Place\" <-> #92 \"Pipe burst flooding road near bus terminal\" (st-watermain-np; 126 m, score=0.5381)",
+        "#91 \"Water main burst outside Nehru Place\" <-> #93 \"Water fountain from broken pipe\" (st-watermain-np; 142 m, score=0.5267)",
+        "#92 \"Pipe burst flooding road near bus terminal\" <-> #93 \"Water fountain from broken pipe\" (st-watermain-np; 258 m, score=0.3606)",
+        "#94 \"Drain blocked behind Paras cinema\" <-> #95 \"Plastic choking drain near cinema\" (st-drain-paras; 152 m, score=0.5715)",
+        "#96 \"Garbage heap at Nehru Place entrance\" <-> #97 \"Waste dumped at main entrance\" (st-garbage-np; 158 m, score=0.559)"
+      ],
+      "testFalsePositives": [
+        "#12 \"Water pipe burst in Central Market\" <-> #16 \"Blocked drain in lane 2\" (ln-water-lane2 vs ln-drain-lane2; 45 m, score=0.4433)",
+        "#12 \"Water pipe burst in Central Market\" <-> #17 \"Naali overflow\" (ln-water-lane2 vs ln-drain-lane2; 56 m, score=0.3673)",
+        "#12 \"Water pipe burst in Central Market\" <-> #18 \"Sewage overflowing near market\" (ln-water-lane2 vs ln-drain-lane2; 34 m, score=0.392)",
+        "#13 \"Water leakage on lane 2\" <-> #16 \"Blocked drain in lane 2\" (ln-water-lane2 vs ln-drain-lane2; 36 m, score=0.4382)",
+        "#13 \"Water leakage on lane 2\" <-> #17 \"Naali overflow\" (ln-water-lane2 vs ln-drain-lane2; 40 m, score=0.3825)",
+        "#13 \"Water leakage on lane 2\" <-> #18 \"Sewage overflowing near market\" (ln-water-lane2 vs ln-drain-lane2; 27 m, score=0.3924)",
+        "#14 \"Paani waste ho raha hai\" <-> #16 \"Blocked drain in lane 2\" (ln-water-lane2 vs ln-drain-lane2; 67 m, score=0.3564)",
+        "#14 \"Paani waste ho raha hai\" <-> #17 \"Naali overflow\" (ln-water-lane2 vs ln-drain-lane2; 74 m, score=0.3538)",
+        "#14 \"Paani waste ho raha hai\" <-> #18 \"Sewage overflowing near market\" (ln-water-lane2 vs ln-drain-lane2; 57 m, score=0.3696)",
+        "#45 \"Streetlights not working Sector 7\" <-> #49 \"Garbage near pocket B park\" (rh-light-pocketb vs rh-garbage-park; 22 m, score=0.3955)",
+        "#45 \"Streetlights not working Sector 7\" <-> #50 \"Kooda near park\" (rh-light-pocketb vs rh-garbage-park; 11 m, score=0.3788)",
+        "#46 \"Dark lane in pocket B\" <-> #49 \"Garbage near pocket B park\" (rh-light-pocketb vs rh-garbage-park; 36 m, score=0.4287)",
+        "#46 \"Dark lane in pocket B\" <-> #50 \"Kooda near park\" (rh-light-pocketb vs rh-garbage-park; 35 m, score=0.3614)",
+        "#47 \"Bulb fused in streetlight\" <-> #49 \"Garbage near pocket B park\" (rh-light-pocketb vs rh-garbage-park; 41 m, score=0.3656)",
+        "#47 \"Bulb fused in streetlight\" <-> #50 \"Kooda near park\" (rh-light-pocketb vs rh-garbage-park; 25 m, score=0.3684)",
+        "#65 \"Garbage burning near drain\" <-> #66 \"Drain cover missing\" (jp-garbage-burning vs jp-drain-cover; 14 m, score=0.435)",
+        "#65 \"Garbage burning near drain\" <-> #67 \"Open drain behind B block\" (jp-garbage-burning vs jp-drain-cover; 21 m, score=0.4397)",
+        "#76 \"Sewer overflowing on main road\" <-> #81 \"Road broken due to sewer water\" (sh-drain-gtroad vs sh-road-sewerdamage; 14 m, score=0.4676)",
+        "#77 \"Gutter overflow near flyover\" <-> #81 \"Road broken due to sewer water\" (sh-drain-gtroad vs sh-road-sewerdamage; 28 m, score=0.4696)",
+        "#78 \"Sewage on road\" <-> #81 \"Road broken due to sewer water\" (sh-drain-gtroad vs sh-road-sewerdamage; 34 m, score=0.4848)"
+      ],
+      "testFalseNegatives": []
+    },
+    {
+      "name": "Baseline: same category + distance",
+      "parameter": "max distance (m)",
+      "chosenOnDev": 80,
+      "dev": {
+        "precision": 1,
+        "recall": 0.9310344827586207,
+        "f1": 0.9642857142857143,
+        "tp": 27,
+        "fp": 0,
+        "fn": 2
+      },
+      "test": {
+        "precision": 1,
+        "recall": 1,
+        "f1": 1,
+        "tp": 28,
+        "fp": 0,
+        "fn": 0,
+        "tn": 752
+      },
+      "stress": {
+        "precision": 0.25,
+        "recall": 0.2857142857142857,
+        "f1": 0.26666666666666666,
+        "tp": 2,
+        "fp": 6,
+        "fn": 5,
+        "tn": 107
+      },
+      "stressFalsePositives": [
+        "#83 \"Pothole at ITO crossing\" <-> #85 \"Missing road divider railing\" (st-pothole-ito vs st-divider-ito; 40 m, score=0.5507)",
+        "#83 \"Pothole at ITO crossing\" <-> #86 \"Divider railing broken at ITO\" (st-pothole-ito vs st-divider-ito; 45 m, score=0.5189)",
+        "#84 \"Big hole at ITO signal\" <-> #85 \"Missing road divider railing\" (st-pothole-ito vs st-divider-ito; 30 m, score=0.5435)",
+        "#84 \"Big hole at ITO signal\" <-> #86 \"Divider railing broken at ITO\" (st-pothole-ito vs st-divider-ito; 36 m, score=0.5298)",
+        "#87 \"Bin overflowing near bus stop\" <-> #88 \"Dead animal on roadside\" (st-bin-ito vs st-carcass-ito; 30 m, score=0.5801)",
+        "#89 \"Streetlight pole leaning\" <-> #90 \"Lights off on footbridge\" (st-pole-ito vs st-fob-ito; 32 m, score=0.581)"
+      ],
+      "stressFalseNegatives": [
+        "#91 \"Water main burst outside Nehru Place\" <-> #92 \"Pipe burst flooding road near bus terminal\" (st-watermain-np; 126 m, score=0.5381)",
+        "#91 \"Water main burst outside Nehru Place\" <-> #93 \"Water fountain from broken pipe\" (st-watermain-np; 142 m, score=0.5267)",
+        "#92 \"Pipe burst flooding road near bus terminal\" <-> #93 \"Water fountain from broken pipe\" (st-watermain-np; 258 m, score=0.3606)",
+        "#94 \"Drain blocked behind Paras cinema\" <-> #95 \"Plastic choking drain near cinema\" (st-drain-paras; 152 m, score=0.5715)",
+        "#96 \"Garbage heap at Nehru Place entrance\" <-> #97 \"Waste dumped at main entrance\" (st-garbage-np; 158 m, score=0.559)"
+      ],
+      "testFalsePositives": [],
+      "testFalseNegatives": []
+    },
+    {
+      "name": "Baseline: text similarity only",
+      "parameter": "cosine threshold",
+      "chosenOnDev": 0.28,
+      "dev": {
+        "precision": 0.68,
+        "recall": 0.5862068965517241,
+        "f1": 0.6296296296296295,
+        "tp": 17,
+        "fp": 8,
+        "fn": 12
+      },
+      "test": {
+        "precision": 0.5555555555555556,
+        "recall": 0.5357142857142857,
+        "f1": 0.5454545454545454,
+        "tp": 15,
+        "fp": 12,
+        "fn": 13,
+        "tn": 740
+      },
+      "stress": {
+        "precision": 1,
+        "recall": 0.5714285714285714,
+        "f1": 0.7272727272727273,
+        "tp": 4,
+        "fp": 0,
+        "fn": 3,
+        "tn": 113
+      },
+      "stressFalsePositives": [],
+      "stressFalseNegatives": [
+        "#91 \"Water main burst outside Nehru Place\" <-> #92 \"Pipe burst flooding road near bus terminal\" (st-watermain-np; 126 m, score=0.5381)",
+        "#91 \"Water main burst outside Nehru Place\" <-> #93 \"Water fountain from broken pipe\" (st-watermain-np; 142 m, score=0.5267)",
+        "#92 \"Pipe burst flooding road near bus terminal\" <-> #93 \"Water fountain from broken pipe\" (st-watermain-np; 258 m, score=0.3606)"
+      ],
+      "testFalsePositives": [
+        "#16 \"Blocked drain in lane 2\" <-> #76 \"Sewer overflowing on main road\" (ln-drain-lane2 vs sh-drain-gtroad; 12558 m, score=outside window)",
+        "#16 \"Blocked drain in lane 2\" <-> #77 \"Gutter overflow near flyover\" (ln-drain-lane2 vs sh-drain-gtroad; 12578 m, score=outside window)",
+        "#16 \"Blocked drain in lane 2\" <-> #78 \"Sewage on road\" (ln-drain-lane2 vs sh-drain-gtroad; 12528 m, score=outside window)",
+        "#17 \"Naali overflow\" <-> #67 \"Open drain behind B block\" (ln-drain-lane2 vs jp-drain-cover; 16246 m, score=outside window)",
+        "#17 \"Naali overflow\" <-> #76 \"Sewer overflowing on main road\" (ln-drain-lane2 vs sh-drain-gtroad; 12544 m, score=outside window)",
+        "#17 \"Naali overflow\" <-> #77 \"Gutter overflow near flyover\" (ln-drain-lane2 vs sh-drain-gtroad; 12564 m, score=outside window)",
+        "#18 \"Sewage overflowing near market\" <-> #61 \"Overflowing garbage at C block market\" (ln-drain-lane2 vs jp-garbage-cblock; 16368 m, score=outside window)",
+        "#18 \"Sewage overflowing near market\" <-> #67 \"Open drain behind B block\" (ln-drain-lane2 vs jp-drain-cover; 16225 m, score=outside window)",
+        "#18 \"Sewage overflowing near market\" <-> #76 \"Sewer overflowing on main road\" (ln-drain-lane2 vs sh-drain-gtroad; 12557 m, score=outside window)",
+        "#18 \"Sewage overflowing near market\" <-> #77 \"Gutter overflow near flyover\" (ln-drain-lane2 vs sh-drain-gtroad; 12577 m, score=outside window)",
+        "#18 \"Sewage overflowing near market\" <-> #78 \"Sewage on road\" (ln-drain-lane2 vs sh-drain-gtroad; 12527 m, score=outside window)",
+        "#34 \"Light pole fallen\" <-> #47 \"Bulb fused in streetlight\" (sk-light-pole-jblock vs rh-light-pocketb; 23324 m, score=outside window)"
+      ],
+      "testFalseNegatives": [
+        "#13 \"Water leakage on lane 2\" <-> #14 \"Paani waste ho raha hai\" (ln-water-lane2; 34 m, score=0.6357)",
+        "#29 \"Potholes on Press Enclave Marg\" <-> #30 \"Road full of holes opposite mall\" (sk-pothole-pressenclave; 40 m, score=0.5737)",
+        "#30 \"Road full of holes opposite mall\" <-> #31 \"Crater on Press Enclave road\" (sk-pothole-pressenclave; 67 m, score=0.5391)",
+        "#32 \"Pothole near Saket metro\" <-> #33 \"Hole in road at metro exit\" (sk-pothole-metro; 13 m, score=0.6491)",
+        "#34 \"Light pole fallen\" <-> #35 \"Electric pole down with wires\" (sk-light-pole-jblock; 14 m, score=0.6493)",
+        "#45 \"Streetlights not working Sector 7\" <-> #46 \"Dark lane in pocket B\" (rh-light-pocketb; 25 m, score=0.5591)",
+        "#45 \"Streetlights not working Sector 7\" <-> #47 \"Bulb fused in streetlight\" (rh-light-pocketb; 32 m, score=0.623)",
+        "#46 \"Dark lane in pocket B\" <-> #47 \"Bulb fused in streetlight\" (rh-light-pocketb; 56 m, score=0.5391)",
+        "#61 \"Overflowing garbage at C block market\" <-> #63 \"Trash spread across market road\" (jp-garbage-cblock; 21 m, score=0.6147)",
+        "#62 \"Bin overflow C block\" <-> #63 \"Trash spread across market road\" (jp-garbage-cblock; 38 m, score=0.5356)",
+        "#62 \"Bin overflow C block\" <-> #64 \"Market kachra\" (jp-garbage-cblock; 40 m, score=0.583)",
+        "#63 \"Trash spread across market road\" <-> #64 \"Market kachra\" (jp-garbage-cblock; 39 m, score=0.5976)",
+        "#77 \"Gutter overflow near flyover\" <-> #78 \"Sewage on road\" (sh-drain-gtroad; 61 m, score=0.5978)"
+      ]
+    }
+  ],
+  "devErrorsModel": {
+    "falsePositives": [
+      "#70 \"Damaged bus stop\" <-> #72 \"Pothole near bus stop\" (vk-infra-busshelter vs vk-road-busstop; 11 m, score=0.6083)",
+      "#70 \"Damaged bus stop\" <-> #73 \"Road damage at bus stop\" (vk-infra-busshelter vs vk-road-busstop; 17 m, score=0.6753)"
+    ],
+    "falseNegatives": [
+      "#26 \"Streetlights off on Pusa Road\" <-> #28 \"Streetlight issue again\" (kb-light-pusa; 16 m, score=outside window)",
+      "#27 \"Pusa Road dark at night\" <-> #28 \"Streetlight issue again\" (kb-light-pusa; 47 m, score=outside window)",
+      "#58 \"Potholes on service road\" <-> #60 \"Pothole on NH-24 service road\" (mv-road-nh24; 400 m, score=outside window)",
+      "#59 \"Service road damaged\" <-> #60 \"Pothole on NH-24 service road\" (mv-road-nh24; 420 m, score=outside window)"
+    ]
+  }
+}
