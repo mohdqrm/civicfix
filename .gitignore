@@ -3,6 +3,7 @@ node_modules/
 *.local
 dist/
 server/uploads/
+server/uploads-test/
 coverage/
 playwright-report/
 test-results/
