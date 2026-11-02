@@ -66,6 +66,11 @@ describe('input handling', () => {
     expect(got.body.complaint.title).toBe(payload); // unchanged data, never rendered as HTML by the API
   });
 
+  it('a missing photo is a 404, not a server error or the web page', async () => {
+    const res = await request(app).get('/uploads/00000000-0000-0000-0000-000000000000.webp');
+    expect(res.status).toBe(404);
+  });
+
   it('cannot read files outside the uploads folder', async () => {
     for (const p of ['/uploads/../.env', '/uploads/..%2f.env', '/uploads/%2e%2e/package.json', '/uploads/.hidden']) {
       const res = await request(app).get(p);

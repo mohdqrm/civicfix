@@ -78,6 +78,7 @@ export function createApp({ rateLimits = DEFAULT_LIMITS } = {}) {
         index: false,
         dotfiles: 'deny',
         maxAge: '7d',
+        fallthrough: false, // a missing photo is a 404, not the React app
         setHeaders: (res) => res.setHeader('Content-Type', 'image/webp'),
       })
     );
@@ -86,7 +87,10 @@ export function createApp({ rateLimits = DEFAULT_LIMITS } = {}) {
   // In production the same server hosts the built React app (one origin -> simple cookies).
   if (existsSync(config.clientDist)) {
     app.use(express.static(config.clientDist, { index: false }));
-    app.get('*', (_req, res) => res.sendFile(path.join(config.clientDist, 'index.html')));
+    // Page URLs (no file extension, e.g. /issues/42) get the React app; React Router
+    // shows the right page. Anything that looks like a file (/.env, /x.php) is a plain 404.
+    app.get(/^\/(?!api\/|uploads\/)[^.]*$/, (_req, res) => res.sendFile(path.join(config.clientDist, 'index.html')));
+    app.use((_req, res) => res.status(404).type('text').send('Not found'));
   }
 
   app.use(errorHandler);

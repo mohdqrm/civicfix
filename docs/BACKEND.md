@@ -129,5 +129,4 @@ Manual checks also done with `curl` against the running dev server: health, cate
 
 ## What's next
 
-- **Step 6 (admin UI) and Step 7 (maps):** the APIs they need already exist (`/admin/*`, `/complaints/map`, `?lat&lng&radius`).
-- **Step 2 (frontend):** not started; `client/` doesn't exist yet. The root `package.json` already lists it as a workspace.
+The frontend (Step 2, with the admin UI from Step 6 and the maps from Step 7) is now built; see [FRONTEND.md](FRONTEND.md). Later backend changes made while testing it in the browser (the session endpoint, sentence-case status labels, configurable rate limits, proper 404s next to the React app) are listed there.

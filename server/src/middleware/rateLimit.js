@@ -4,10 +4,14 @@
 // for a single server instance.
 import { ipKeyGenerator, rateLimit } from 'express-rate-limit';
 
+// Each limit can be raised with an env var for automated browser tests, which log in
+// many times from one IP. Leave them unset in production.
+const envInt = (name, fallback) => (process.env[name] ? Number(process.env[name]) : fallback);
+
 export const DEFAULT_LIMITS = Object.freeze({
-  global: { windowMs: 15 * 60 * 1000, limit: 600 }, // all /api requests per IP
-  auth: { windowMs: 15 * 60 * 1000, limit: 20 }, // login/register attempts per IP
-  createComplaint: { windowMs: 60 * 60 * 1000, limit: 10 }, // new reports per user per hour
+  global: { windowMs: 15 * 60 * 1000, limit: envInt('RATE_LIMIT_GLOBAL', 600) }, // all /api requests per IP
+  auth: { windowMs: 15 * 60 * 1000, limit: envInt('RATE_LIMIT_AUTH', 20) }, // login/register attempts per IP
+  createComplaint: { windowMs: 60 * 60 * 1000, limit: envInt('RATE_LIMIT_REPORTS', 10) }, // new reports per user per hour
 });
 
 const handler = (_req, res, _next, options) =>

@@ -9,8 +9,8 @@ import { config } from '../config.js';
 
 export const STATUS_LABELS = {
   submitted: 'Submitted',
-  under_review: 'Under Review',
-  in_progress: 'In Progress',
+  under_review: 'Under review',
+  in_progress: 'In progress',
   resolved: 'Resolved',
   rejected: 'Rejected',
 };

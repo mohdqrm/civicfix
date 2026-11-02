@@ -42,6 +42,11 @@ export function errorHandler(err, req, res, _next) {
     message = 'Request body is too large';
   } else if (err.code && PG_ERRORS[err.code]) {
     [status, code, message] = PG_ERRORS[err.code];
+  } else if (Number.isInteger(err.status) && err.status >= 400 && err.status < 500) {
+    // 4xx errors raised by Express itself (e.g. static files: missing → 404, dotfile → 403)
+    status = err.status;
+    code = status === 404 ? 'NOT_FOUND' : status === 403 ? 'FORBIDDEN' : 'BAD_REQUEST';
+    message = status === 404 ? 'Not found' : status === 403 ? 'Forbidden' : 'Bad request';
   }
 
   // Always log unexpected errors (tests included — a 500 in a test is a bug worth seeing).

@@ -73,9 +73,14 @@ describe('login / me / logout', () => {
     expect(me.status).toBe(200);
     expect(me.body.user.email).toBe(user.email);
 
+    expect((await agent.get('/api/auth/session')).body.user.id).toBe(user.id);
+
     const out = await agent.post('/api/auth/logout');
     expect(out.status).toBe(200);
     expect((await agent.get('/api/auth/me')).status).toBe(401);
+    const session = await agent.get('/api/auth/session');
+    expect(session.status).toBe(200);
+    expect(session.body).toEqual({ user: null });
   });
 
   it('gives the same error for wrong password and unknown email', async () => {

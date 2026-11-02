@@ -75,5 +75,9 @@ export function authRouter(limiters) {
 
   router.get('/me', requireAuth, (req, res) => res.json({ user: publicUser(req.user) }));
 
+  // Same as /me but answers 200 { user: null } when logged out. The frontend calls
+  // this on every page load, so logged-out visitors don't produce 401s in the console.
+  router.get('/session', (req, res) => res.json({ user: req.user ? publicUser(req.user) : null }));
+
   return router;
 }
