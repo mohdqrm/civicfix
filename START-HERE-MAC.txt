@@ -1,0 +1,123 @@
+CIVICFIX: RUN IT ON A MAC
+=========================
+
+Works on Apple Silicon (M1/M2/M3/M4) and Intel Macs. About 20 minutes the first time.
+"Terminal" is the Mac's black command window (the Windows "cmd").
+Control = the Ctrl key. Command = the ⌘ key. They are different.
+
+
+0. GET THE PROJECT ONTO THE MAC
+   Copy civicfix.zip to the Mac (Google Drive, email, pen drive...).
+   IMPORTANT: copy the ZIP, not a folder from a Windows PC where you already ran
+   "npm install". Its node_modules folder contains Windows-only parts and won't run on a Mac.
+
+   Move the zip into your Documents folder and double-click it.
+   You get  Documents/civicfix/civicfix  with client, server, docs and this file inside.
+
+
+1. INSTALL NODE.JS
+   https://nodejs.org  ->  download the "LTS" macOS installer (.pkg) and click through it.
+
+
+2. INSTALL POSTGRESQL (using Postgres.app, the easiest way on a Mac)
+   a. https://postgresapp.com  ->  Download, open the .dmg, drag Postgres into Applications.
+   b. Open Postgres from Applications and click "Initialize". The elephant icon
+      appears in the menu bar at the top of the screen, and the server shows "Running".
+   c. Postgres.app has NO password. Your PostgreSQL user name is your Mac user name.
+      (You'll look it up in step 4.)
+   d. Postgres.app may later ask whether to allow "node" or "Terminal" to connect.
+      Click OK / Allow.
+
+
+3. OPEN TERMINAL IN THE PROJECT FOLDER
+   Press Command + Space, type  Terminal, and press Return. Then type:
+
+      cd ~/Documents/civicfix/civicfix
+
+   and press Return. Type  ls  and press Return; you should see client, server, docs...
+
+
+4. PUT YOUR DATABASE DETAILS IN THE SETTINGS FILE
+   a. Find your Mac user name. Type this and press Return:
+
+         whoami
+
+      It prints something like  mohd  . That is your PostgreSQL user name.
+
+   b. Open the settings file in TextEdit:
+
+         open -e server/.env
+
+      (Finder hides files that start with a dot, so open it this way.)
+
+   c. Change the two database lines so they use your user name and NO password.
+      If whoami printed  mohd , they become:
+
+         DATABASE_URL=postgres://mohd@localhost:5432/civicfix
+         TEST_DATABASE_URL=postgres://mohd@localhost:5432/civicfix_test
+
+      (No ":password" part, because Postgres.app doesn't use one.)
+   d. Save with Command + S and close TextEdit.
+
+   If you installed PostgreSQL another way and DO have a password, use
+      postgres://postgres:YOURPASSWORD@localhost:5432/civicfix
+   and write any @ inside the password as %40 (e.g. pass@123 -> pass%40123).
+
+
+5. INSTALL AND SET UP (in Terminal, one at a time, wait for each to finish)
+
+      npm install
+      npm run setup
+
+   "setup" creates the database, the tables, demo accounts with 10 sample
+   reports, and builds the website. You should see the demo logins printed.
+
+
+EVERY TIME YOU WANT TO RUN IT
+
+   1. Make sure Postgres.app is running (elephant in the menu bar).
+   2. In Terminal:
+         cd ~/Documents/civicfix/civicfix
+         npm start
+   3. Open  http://localhost:4000  in Safari or Chrome.
+      Leave Terminal open while you use the site.
+   4. To stop: click in the Terminal window and press Control + C (Control, not Command).
+
+   Demo logins:
+     Citizen:  citizen@civicfix.demo / Citizen@12345
+     Admin:    admin@civicfix.demo   / Admin@12345   (log in at http://localhost:4000/admin/login)
+
+
+IF SOMETHING GOES WRONG
+
+   "Could not reach PostgreSQL"          -> open Postgres.app and click Start
+   "PostgreSQL rejected the password" or
+   'role "postgres" does not exist'      -> the user name in server/.env doesn't match
+                                            whoami (step 4)
+   "command not found: npm"              -> quit Terminal (Command + Q), open it again
+   "address already in use ... 4000"     -> an old copy is still running. Stop it with:
+                                               lsof -ti :4000 | xargs kill
+                                            then run  npm start  again
+   Error mentioning "sharp" or a
+   wrong platform                        -> you copied node_modules from a Windows PC. Run:
+                                               rm -rf node_modules
+                                               npm install
+   Map shows pins but no streets         -> reload with Command + Shift + R
+
+
+IF YOU CHANGE THE CODE (optional)
+   Two Terminal windows give you live reload:
+     npm run dev:server
+     npm run dev:client      -> open http://localhost:5173
+   After changing code, run  npm run build  before using  npm start  again.
+
+
+WINDOWS VS MAC: WHAT'S DIFFERENT
+   Windows                                  Mac
+   cmd from the folder's address bar        Terminal, then  cd ~/Documents/civicfix/civicfix
+   PostgreSQL installer, with a password    Postgres.app, your Mac user name, no password
+   notepad server\.env                      open -e server/.env
+   Ctrl + C to stop                         Control + C to stop
+   netstat/taskkill to free port 4000       lsof -ti :4000 | xargs kill
+   Ctrl + Shift + R to hard-reload          Command + Shift + R
+   npm install / setup / start              exactly the same
