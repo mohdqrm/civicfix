@@ -84,11 +84,12 @@ Run them: `npm test` (server + client unit tests); `npm run test:e2e` (builds, s
 | E2E step 10 | UI said "In progress", notifications said "In Progress" | Server labels changed to sentence case to match the UI |
 | E2E second run | Login rate limit (20 per 15 min) tripped by repeated test runs | Limits are now configurable (`RATE_LIMIT_AUTH`); the test server raises it, production keeps 20 |
 | Backend suite after the build | With the React app present, `/uploads/../.env` and missing photos returned the homepage with status 200 | Only extension-less page URLs get the React app; files are real 404s; missing photos are 404 (new test) |
+| Running on a real PC (user report, 3 Nov) | Map showed pins but no streets | helmet's default `Referrer-Policy: no-referrer` stopped the browser sending a Referer, which OpenStreetMap's tile policy requires. The sandbox couldn't reach OSM, so tests never saw it | `strict-origin-when-cross-origin` (sends only the origin), tile URL updated to `tile.openstreetmap.org`; header test added; verified in Chrome that tile requests now carry a Referer |
 | E2E (test bugs, not app bugs) | Test clicked before the login redirect finished; repeated runs stacked pins on top of each other | The test waits for the redirect; pin position varies per run |
 
 ## Known limitations
 
-- **Map tiles in the screenshots are grey** because this build environment can't reach OpenStreetMap's tile servers. On a normal internet connection the street map appears behind the pins.
+- **Map tiles in the screenshots are grey** because this build environment can't reach OpenStreetMap's tile servers.
 - **E2E tests write to the development database** (new users and complaints each run), which is why the duplicates screenshot shows several "Gate 4" test reports. Step 10 will produce clean demo screenshots from a freshly seeded database.
 - "Near me" needs the browser's location permission and HTTPS (or localhost); without them, users get a clear message and pick on the map instead.
 - No offline support, and no photo compression in the browser. Photos up to 5 MB upload as-is and are shrunk on the server.

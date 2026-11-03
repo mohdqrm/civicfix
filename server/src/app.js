@@ -34,7 +34,7 @@ export function createApp({ rateLimits = DEFAULT_LIMITS } = {}) {
         directives: {
           defaultSrc: ["'self'"],
           // Leaflet map tiles come from OpenStreetMap; photos may come from Cloudinary.
-          imgSrc: ["'self'", 'data:', 'blob:', 'https://*.tile.openstreetmap.org', 'https://res.cloudinary.com'],
+          imgSrc: ["'self'", 'data:', 'blob:', 'https://tile.openstreetmap.org', 'https://res.cloudinary.com'],
           styleSrc: ["'self'", "'unsafe-inline'"], // Leaflet sets inline styles on map elements
           connectSrc: ["'self'"],
           objectSrc: ["'none'"],
@@ -42,6 +42,9 @@ export function createApp({ rateLimits = DEFAULT_LIMITS } = {}) {
         },
       },
       crossOriginResourcePolicy: { policy: 'same-site' },
+      // helmet's default ("no-referrer") makes OpenStreetMap refuse map tiles, because its
+      // tile policy requires a Referer. This sends only our origin (never the page path) to other sites.
+      referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
     })
   );
   // Only needed when the React dev server runs on a different origin.

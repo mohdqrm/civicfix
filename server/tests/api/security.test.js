@@ -19,6 +19,9 @@ describe('security headers and error handling', () => {
     expect(res.headers['x-content-type-options']).toBe('nosniff');
     expect(res.headers['content-security-policy']).toMatch(/default-src 'self'/);
     expect(res.headers['content-security-policy']).toMatch(/frame-ancestors 'none'/);
+    // Map tiles: OpenStreetMap must be allowed as an image source and must receive a Referer.
+    expect(res.headers['content-security-policy']).toMatch(/img-src [^;]*https:\/\/tile\.openstreetmap\.org/);
+    expect(res.headers['referrer-policy']).toBe('strict-origin-when-cross-origin');
   });
 
   it('unknown API routes return JSON 404', async () => {
