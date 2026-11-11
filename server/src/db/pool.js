@@ -13,6 +13,15 @@ export const pool = new pg.Pool({
   connectionString: config.databaseUrl,
   ssl: config.databaseSsl ? { rejectUnauthorized: false } : undefined,
   max: 10,
+  idleTimeoutMillis: 30_000,
+});
+
+// Hosted databases (Neon, Render) close idle connections, e.g. when the database
+// sleeps. pg reports that as an 'error' event on the pool; without a listener
+// Node treats it as unhandled and the whole server crashes. The pool simply
+// opens a fresh connection for the next query, so logging is enough.
+pool.on('error', (err) => {
+  console.error('PostgreSQL idle connection closed:', err.message);
 });
 
 export const query = (text, params) => pool.query(text, params);

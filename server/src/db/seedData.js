@@ -29,6 +29,9 @@ export const DEMO_ACCOUNTS = {
 };
 
 async function upsertUser(db, { name, email, password }, role, rounds) {
+  // The seed runs on every deploy; skip the slow bcrypt hash when the account exists.
+  const found = await db.query('SELECT id FROM users WHERE LOWER(email) = LOWER($1)', [email]);
+  if (found.rows.length) return found.rows[0].id;
   const hash = await bcrypt.hash(password, rounds);
   await db.query(
     `INSERT INTO users (name, email, password_hash, role) VALUES ($1, $2, $3, $4)

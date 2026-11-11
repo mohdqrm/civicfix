@@ -1,0 +1,37 @@
+# Render Blueprint: Render reads this file and creates the CivicFix web service.
+# In Render: New + -> Blueprint -> pick this repository. It will ask for the four
+# values marked "sync: false" (they are secrets, so they are never stored in Git).
+services:
+  - type: web
+    name: civicfix
+    runtime: node
+    plan: free
+    region: singapore # closest Render region to India
+    # devDependencies (Vite) are needed to build the React app, hence --include=dev.
+    buildCommand: npm ci --include=dev && npm run build
+    # Migrations and the seed are safe to run on every start: they only add what's missing.
+    startCommand: npm run db:migrate && npm run db:seed && npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "22"
+      - key: TRUST_PROXY # Render puts one proxy in front of the app
+        value: "1"
+      - key: JWT_SECRET # Render generates a long random value
+        generateValue: true
+      - key: DATABASE_SSL
+        value: "true"
+      - key: STORAGE_DRIVER # Render's free disk is wiped on every restart
+        value: cloudinary
+      - key: SEED_DEMO # sample complaints + demo citizens for the college demo
+        value: "true"
+      - key: DATABASE_URL # Neon connection string
+        sync: false
+      - key: CLOUDINARY_URL # cloudinary://<key>:<secret>@<cloud_name>
+        sync: false
+      - key: SEED_ADMIN_EMAIL # your admin login
+        sync: false
+      - key: SEED_ADMIN_PASSWORD
+        sync: false

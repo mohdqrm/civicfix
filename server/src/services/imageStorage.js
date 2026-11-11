@@ -63,7 +63,7 @@ function cloudinaryCreds() {
   return { apiKey: m[1], apiSecret: m[2], cloud: m[3] };
 }
 
-function sign(params, secret) {
+export function sign(params, secret) {
   const toSign = Object.keys(params)
     .sort()
     .map((k) => `${k}=${params[k]}`)
@@ -96,4 +96,5 @@ const cloudinaryDriver = {
   },
 };
 
+export { cloudinaryDriver };
 export const storage = config.storageDriver === 'cloudinary' ? cloudinaryDriver : localDriver;
