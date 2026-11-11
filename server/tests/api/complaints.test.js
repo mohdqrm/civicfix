@@ -14,7 +14,11 @@ beforeAll(async () => {
 });
 afterAll(async () => (await db()).end());
 
-const uploadFiles = () => (existsSync(config.uploadDir) ? readdirSync(config.uploadDir) : []);
+// Number of stored photos, for whichever storage driver the suite runs with.
+const storedPhotos = async () =>
+  config.storageDriver === 'database'
+    ? Number((await (await db()).query('SELECT COUNT(*) AS n FROM photos')).rows[0].n)
+    : (existsSync(config.uploadDir) ? readdirSync(config.uploadDir) : []).length;
 
 describe('POST /api/complaints (report an issue)', () => {
   it('creates a complaint with photo, tracking ID, first history entry and auto-assigned department', async () => {
@@ -49,7 +53,7 @@ describe('POST /api/complaints (report an issue)', () => {
   });
 
   it('rejects a non-image disguised as a JPEG, and stores nothing', async () => {
-    const before = uploadFiles().length;
+    const before = await storedPhotos();
     const where = isolatedSpot();
     const res = await citizen.agent
       .post('/api/complaints')
@@ -61,7 +65,7 @@ describe('POST /api/complaints (report an issue)', () => {
       .attach('photo', Buffer.from('<?php system($_GET["c"]); ?>'), { filename: 'shell.jpg', contentType: 'image/jpeg' });
     expect(res.status).toBe(400);
     expect(res.body.error.message).toMatch(/not a valid image/i);
-    expect(uploadFiles().length).toBe(before);
+    expect(await storedPhotos()).toBe(before);
   });
 
   it('rejects disallowed file types and oversized files', async () => {

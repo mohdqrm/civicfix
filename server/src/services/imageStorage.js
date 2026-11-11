@@ -7,14 +7,16 @@
 //     sharp drops all metadata unless asked to keep it.
 //  3. Size: photos are resized to max 1600 px and saved as WebP (much smaller).
 //
-// Two storage drivers share the same interface: save(buffer) -> { url, key },
+// Three storage drivers share the same interface: save(buffer) -> { url, key },
 // remove(key). 'local' writes to server/uploads (fine for development and
-// single-server hosting); 'cloudinary' uploads to Cloudinary's free tier.
+// single-server hosting); 'database' keeps photos in PostgreSQL (for hosts whose
+// disk is wiped on restart, like Render's free plan); 'cloudinary' uploads to Cloudinary.
 import crypto from 'node:crypto';
 import { mkdir, unlink, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
 import { config } from '../config.js';
+import { query } from '../db/pool.js';
 import { HttpError, badRequest } from '../utils/errors.js';
 
 export const ALLOWED_MIME = ['image/jpeg', 'image/png', 'image/webp'];
@@ -53,6 +55,27 @@ const localDriver = {
   async remove(key) {
     if (!/^[0-9a-f-]{36}\.webp$/.test(key)) return; // never touch unexpected paths
     await unlink(path.join(config.uploadDir, key)).catch(() => {});
+  },
+};
+
+// ---------- PostgreSQL ----------
+export const PHOTO_KEY = /^[0-9a-f-]{36}\.webp$/;
+
+const databaseDriver = {
+  async save(buffer) {
+    const key = `${crypto.randomUUID()}.webp`;
+    await query('INSERT INTO photos (key, data) VALUES ($1, $2)', [key, buffer]);
+    return { url: `/uploads/${key}`, key };
+  },
+  async remove(key) {
+    if (!PHOTO_KEY.test(key)) return;
+    await query('DELETE FROM photos WHERE key = $1', [key]).catch(() => {});
+  },
+  /** Photo bytes for GET /uploads/:key, or null if there is no such photo. */
+  async read(key) {
+    if (!PHOTO_KEY.test(key)) return null;
+    const { rows } = await query('SELECT data FROM photos WHERE key = $1', [key]);
+    return rows[0]?.data ?? null;
   },
 };
 
@@ -97,4 +120,8 @@ const cloudinaryDriver = {
 };
 
 export { cloudinaryDriver };
-export const storage = config.storageDriver === 'cloudinary' ? cloudinaryDriver : localDriver;
+const drivers = { local: localDriver, database: databaseDriver, cloudinary: cloudinaryDriver };
+if (!drivers[config.storageDriver]) {
+  throw new Error(`STORAGE_DRIVER must be one of: ${Object.keys(drivers).join(', ')}`);
+}
+export const storage = drivers[config.storageDriver];

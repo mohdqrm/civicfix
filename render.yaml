@@ -1,5 +1,5 @@
 # Render Blueprint: Render reads this file and creates the CivicFix web service.
-# In Render: New + -> Blueprint -> pick this repository. It will ask for the four
+# In Render: New + -> Blueprint -> pick this repository. It will ask for the three
 # values marked "sync: false" (they are secrets, so they are never stored in Git).
 services:
   - type: web
@@ -23,13 +23,11 @@ services:
         generateValue: true
       - key: DATABASE_SSL
         value: "true"
-      - key: STORAGE_DRIVER # Render's free disk is wiped on every restart
-        value: cloudinary
+      - key: STORAGE_DRIVER # Render's free disk is wiped on restart, so photos live in Postgres
+        value: database
       - key: SEED_DEMO # sample complaints + demo citizens for the college demo
         value: "true"
       - key: DATABASE_URL # Neon connection string
-        sync: false
-      - key: CLOUDINARY_URL # cloudinary://<key>:<secret>@<cloud_name>
         sync: false
       - key: SEED_ADMIN_EMAIL # your admin login
         sync: false

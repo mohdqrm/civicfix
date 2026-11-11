@@ -3,7 +3,7 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   test: {
     environment: 'node',
-    env: { NODE_ENV: 'test', UPLOAD_DIR: 'uploads-test', STORAGE_DRIVER: 'local' },
+    env: { NODE_ENV: 'test', UPLOAD_DIR: 'uploads-test', STORAGE_DRIVER: process.env.STORAGE_DRIVER ?? 'local' },
     include: ['tests/**/*.test.js'],
     // Unit tests written for Node's built-in runner are run separately (see package.json).
     exclude: ['tests/**/*.node.test.js', 'node_modules/**'],

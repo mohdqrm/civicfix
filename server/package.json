@@ -10,10 +10,11 @@
     "db:create": "node scripts/create-db.js",
     "db:migrate": "node scripts/migrate.js",
     "db:seed": "node scripts/seed.js",
-    "test": "vitest run && node --test tests/*.node.test.js",
+    "test": "vitest run && node scripts/test-db-photos.js && node --test tests/*.node.test.js",
     "eval:duplicates": "node scripts/evaluate-duplicates.js",
     "test:api": "vitest run",
-    "test:unit": "node --test tests/*.node.test.js"
+    "test:unit": "node --test tests/*.node.test.js",
+    "test:db-photos": "node scripts/test-db-photos.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

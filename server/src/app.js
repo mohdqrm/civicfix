@@ -14,6 +14,7 @@ import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import { config } from './config.js';
 import { pool } from './db/pool.js';
+import { storage } from './services/imageStorage.js';
 import { loadUser } from './middleware/auth.js';
 import { DEFAULT_LIMITS, makeLimiters } from './middleware/rateLimit.js';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
@@ -72,6 +73,22 @@ export function createApp({ rateLimits = DEFAULT_LIMITS } = {}) {
   app.use('/api/me', meRouter());
   app.use('/api/admin', adminRouter());
   app.use('/api', notFoundHandler);
+
+  // Photos kept in PostgreSQL. Keys are random UUIDs checked against a strict
+  // pattern, so nothing else in the database (or on disk) can be requested.
+  if (config.storageDriver === 'database') {
+    app.get('/uploads/:key', async (req, res, next) => {
+      try {
+        const data = await storage.read(req.params.key);
+        if (!data) return res.status(404).type('text').send('Not found');
+        res.set({ 'Content-Type': 'image/webp', 'Cache-Control': 'public, max-age=604800, immutable' });
+        res.send(data);
+      } catch (err) {
+        next(err);
+      }
+    });
+    app.use('/uploads', (_req, res) => res.status(404).type('text').send('Not found'));
+  }
 
   // Locally stored photos. Names are random UUIDs; files are re-encoded WebP only.
   if (config.storageDriver === 'local') {
