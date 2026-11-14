@@ -2,6 +2,8 @@
 // (civicfix_test by default, or TEST_DATABASE_URL), then loads reference data.
 // It refuses to touch any database whose name doesn't end in "_test", so it can
 // never wipe your development or production data.
+// Load server/.env so TEST_DATABASE_URL (with its password) is picked up from a fresh clone.
+import 'dotenv/config';
 import pg from 'pg';
 import { migrate } from '../src/db/migrate.js';
 import { seedReference } from '../src/db/seedData.js';
