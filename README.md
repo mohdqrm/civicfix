@@ -256,11 +256,12 @@ civicfix/
 
 | Name | Enrolment No. |
 |---|---|
-| Mohammed Q | 2581001 |
+
 | Preeti Sharma | 2581383 |
 | Suhani Agarwal | 2581446 |
 | Jeenal Azad | 2581226 |
 
 B.Tech (CSE), Semester III, School of Computer Science and Engineering, IILM University, Gurugram.
 
-**Use of AI tools:** Claude (Anthropic) was used to help write and debug the code and tests, set up deployment, and draft documentation. The team reviewed its output and ran the tests reported above.
+**Use of AI tools:** Gemini was used for researching the api keys deployed into this site 
+
